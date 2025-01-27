@@ -1,0 +1,107 @@
+/* Estilos para el body y fondo */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: url("../assets/logo1.png") center no-repeat; /* Imagen centrada y sin repetirse */
+  background-size: 65vh; /* Ajusta la imagen para que se vea completa sin romperse */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ajuste para dispositivos pequeños */
+@media (max-width: 768px) {
+  body {
+    background-size: contain; /* Asegura que la imagen se ajuste y se vea bien en pantallas más pequeñas */
+  }
+}
+  /* Contenedor del login */
+  .login-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Caja del formulario */
+  .login-box {
+    background-color: rgba(255, 255, 255, 0.8); /* Transparencia */
+    padding: 100px 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 350px;
+    width: 100%;
+  }
+  
+  /* Estilos del formulario */
+  .login-box h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+    text-align: center;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 14px;
+  }
+  
+  .form-group input {
+    width: auto;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+button:hover {
+  background-color: red;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  
+}
+
+/* Enlace Contactanos en la esquina superior izquierda */
+.contact-link {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 3px ;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
