@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./Login"; // Componente Login
+import Login from "./Components/Login"; // Componente Login
 import AdminPanel from "./AdminPanel"; // Componente del Panel de Administrador
 import UserPanel from "./UserPanel"; // Cambia la importación aquí
 

@@ -1,0 +1,43 @@
+/* AdminPanel.css */
+.admin-panel {
+  font-family: 'Roboto', sans-serif;
+  padding: 20px;
+  background-color: #f4f6f9;
+}
+
+.navbar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10%;
+  width: 10%;
+}
+
+
+.main-content {
+  margin-top: 30px;
+}
+
+.button-edit,
+.button-create {
+  margin-top: 10px;
+}
+
+.MuiTextField-root {
+  margin-bottom: 15px;
+}
+
+.MuiButton-root {
+  margin-right: 10px;
+}
+
+.sidebar{
+  padding: 50px;
+  margin: 50px;
+  align-items: center;
+}
+
+.main-content{
+ align-items: center;
+ text-align: center;
+}
