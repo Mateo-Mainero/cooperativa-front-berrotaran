@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Para manejar redirecciones
 import axios from "axios";
 import Avatar from "@mui/material/Avatar"; // Importamos el Avatar de Material UI
 import styles from './login.module.scss'; // Importamos los estilos como un objeto
-import { jwtDecode } from "jwt-decode"; // Asegúrate de usar la importación correcta
+import {jwtDecode} from "jwt-decode"; // Asegúrate de usar la importación correcta
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -21,6 +21,13 @@ function Login() {
     }));
   };
 
+  const checkTokenExpiration = (token) => {
+    const decodedToken = jwtDecode(token);
+    const expirationTime = decodedToken.exp * 1000; // El campo "exp" está en segundos, lo multiplicamos por 1000 para obtener milisegundos
+    const currentTime = Date.now();
+    return currentTime >= expirationTime;
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Datos ingresados:", formData);
@@ -32,13 +39,22 @@ function Login() {
       if (response.data.success) {
         const token = response.data.detalles; // Accediendo al token
         console.log("Token recibido:", token);
-        const decodedToken = jwtDecode(token); // Decodificar el token
-        console.log("Token decodificado:", decodedToken);
+        
+        // Verificar si el token ha expirado
+        if (checkTokenExpiration(token)) {
+          alert("El token ha expirado. Inicia sesión nuevamente.");
+          localStorage.removeItem("authToken"); // Eliminar el token
+          navigate("/login"); // Redirigir al login
+          return;
+        }
 
-        // Guardar el token en el almacenamiento local
+        // Si el token no ha expirado, guardar el token
         localStorage.setItem("authToken", token);
 
         // Redirección basada en el idrol
+        const decodedToken = jwtDecode(token); // Decodificar el token
+        console.log("Token decodificado:", decodedToken);
+
         switch (decodedToken.idrol) {
           case 1:
             navigate("/admin"); // Redirige a la ruta de administrador
@@ -58,6 +74,15 @@ function Login() {
       alert("Error al conectar con el servidor: " + error.message);
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token && checkTokenExpiration(token)) {
+      alert("El token ha expirado. Inicia sesión nuevamente.");
+      localStorage.removeItem("authToken"); // Eliminar el token si ha expirado
+      navigate("/login"); // Redirigir al login si el token ha expirado
+    }
+  }, [navigate]);
 
   return (
     <div className={styles.loginContainer}> {/* Usa styles desde el módulo SCSS */}
@@ -104,3 +129,4 @@ function Login() {
 }
 
 export default Login;
+
