@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Para manejar redirecciones
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Avatar from "@mui/material/Avatar"; // Importamos el Avatar de Material UI
-import styles from './login.module.scss'; // Importamos los estilos como un objeto
-import {jwtDecode} from "jwt-decode"; // Asegúrate de usar la importación correcta
+import Avatar from "@mui/material/Avatar";
+import styles from './login.module.scss';
+import { jwtDecode } from "jwt-decode";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -11,7 +11,7 @@ function Login() {
     password: "",
   });
 
-  const navigate = useNavigate(); // Hook para redirecciones
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { id, value } = event.target;
@@ -23,7 +23,7 @@ function Login() {
 
   const checkTokenExpiration = (token) => {
     const decodedToken = jwtDecode(token);
-    const expirationTime = decodedToken.exp * 1000; // El campo "exp" está en segundos, lo multiplicamos por 1000 para obtener milisegundos
+    const expirationTime = decodedToken.exp * 1000;
     const currentTime = Date.now();
     return currentTime >= expirationTime;
   };
@@ -37,33 +37,47 @@ function Login() {
       console.log("Respuesta del servidor:", response.data);
 
       if (response.data.success) {
-        const token = response.data.detalles; // Accediendo al token
+        const token = response.data.detalles;
         console.log("Token recibido:", token);
-        
-        // Verificar si el token ha expirado
+
         if (checkTokenExpiration(token)) {
           alert("El token ha expirado. Inicia sesión nuevamente.");
-          localStorage.removeItem("authToken"); // Eliminar el token
-          navigate("/login"); // Redirigir al login
+          localStorage.removeItem("authToken");
+          navigate("/login");
           return;
         }
 
-        // Si el token no ha expirado, guardar el token
         localStorage.setItem("authToken", token);
-
-        // Redirección basada en el idrol
-        const decodedToken = jwtDecode(token); // Decodificar el token
+        const decodedToken = jwtDecode(token);
         console.log("Token decodificado:", decodedToken);
 
         switch (decodedToken.idrol) {
           case 1:
-            navigate("/admin"); // Redirige a la ruta de administrador
+            navigate("/admin");
             break;
           case 2:
-            navigate("/ruta-a-definir"); // Redirige a una ruta pendiente de definir
+            navigate("/caja-1");
+            break;
+          case 3:
+            navigate("/caja-2");
+            break;
+          case 4:
+            navigate("/mesa-entrada-1");
+            break;
+          case 5:
+            navigate("/mesa-entrada-2");
+            break;
+          case 6:
+            navigate("/mesa-entrada-3");
+            break;
+          case 7:
+            navigate("/cobranzas");
+            break;
+          case 8:
+            navigate("/servicios-sociales");
             break;
           default:
-            navigate("/login"); // Redirige al login por defecto
+            navigate("/login");
             break;
         }
       } else {
@@ -79,25 +93,20 @@ function Login() {
     const token = localStorage.getItem("authToken");
     if (token && checkTokenExpiration(token)) {
       alert("El token ha expirado. Inicia sesión nuevamente.");
-      localStorage.removeItem("authToken"); // Eliminar el token si ha expirado
-      navigate("/login"); // Redirigir al login si el token ha expirado
+      localStorage.removeItem("authToken");
+      navigate("/login");
     }
   }, [navigate]);
 
   return (
-    <div className={styles.loginContainer}> {/* Usa styles desde el módulo SCSS */}
+    <div className={styles.loginContainer}>
       <a href="/contact" className={styles.contactLink}>Contactanos</a>
       <div className={styles.loginBox}>
         <div className="avatar-container">
           <Avatar
             alt="Foto de perfil"
-            src="" // Aquí puedes agregar un enlace de imagen si lo deseas
-            sx={{
-              width: 100,
-              height: 100,
-              margin: "0 auto",
-              marginBottom: "20px",
-            }}
+            src=""
+            sx={{ width: 100, height: 100, margin: "0 auto", marginBottom: "20px" }}
           />
         </div>
         <form onSubmit={handleSubmit}>
@@ -129,4 +138,5 @@ function Login() {
 }
 
 export default Login;
+
 

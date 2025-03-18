@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 function TurnosPanel() {
     const [turno, setTurno] = useState(25);
@@ -10,6 +11,21 @@ function TurnosPanel() {
     useEffect(() => {
         const token = localStorage.getItem("authToken");
         if (!token) {
+            navigate("/");
+            return;
+        }
+        
+        try {
+            const decodedToken = jwtDecode(token);
+            console.log("Token decodificado:", decodedToken);
+            
+            // Excluir el acceso de administradores (id_rol = 1)
+            if (decodedToken.idrol === 1) {
+                alert("Acceso denegado. Solo usuarios autorizados pueden acceder.");
+                navigate("/");
+            }
+        } catch (error) {
+            console.error("Error al decodificar el token:", error);
             navigate("/");
         }
     }, [navigate]);
