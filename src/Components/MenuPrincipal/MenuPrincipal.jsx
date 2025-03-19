@@ -12,7 +12,7 @@ const MenuPrincipal = () => {
     <div className={styles["tablet-container text-center"]}>
 
       <div>
-        <img src="../src/assets/logo1.png" height="7%" width="7%" alt="Logo" />
+        <img className="icon-one" src="../src/assets/logo1.png" height="7%" width="7%" alt="Logo" />
       </div>
       <div className="container text-center">
         <div className="row g-3">
@@ -23,7 +23,7 @@ const MenuPrincipal = () => {
             </div>
           </div>
           <div className="col-6">
-              <div className={styles["menu-item"]} onClick={() => navigate("/mesa-de-entrada")}> 
+          <div className={styles["menu-item"]} onClick={() => navigate("/mesa-de-entrada")}>
               <i className={`bi bi-bank ${styles["menu-icon"]}`}></i>
               <p>Mesa De Entradas</p>
             </div>
