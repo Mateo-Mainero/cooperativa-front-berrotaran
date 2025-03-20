@@ -6,7 +6,10 @@ import TurnosPanel from "./TurnosPanel"; // Cambia la importación aquí
 import MenuPrincipal from "./Components/MenuPrincipal/MenuPrincipal";
 import PagoServicios from "./Components/PagoServicios/PagoServicios";
 import MesaDeEntrada from "./Components/MesaDeEntrada/MesaDeEntrada"; 
-
+import CuentasCorrientes from "./Components/Cobranzas/CuentasCorrientes";
+import ServiciosSociales from "./Components/ServiciosSociales/ServiciosSociales";
+import OtrosFacturacion from "./Components/Otros/Otros";
+import VisualizadorTickets from "./Components/VisualizadorTickets/VisualizadorTickets";
 
 
 // Componente de protección de rutas (requiere autenticación)
@@ -27,9 +30,10 @@ function App() {
           <Route path="/menu" element={<MenuPrincipal />} />
           <Route path="/servicios" element={<PagoServicios />} />
           <Route path="/mesa-de-entrada" element={<MesaDeEntrada />} />
-        <Route path="/cobranzas" element={<div>Cobranzas</div>} />
-        <Route path="/servicios-sociales" element={<div>Servicios Sociales</div>} />
-        <Route path="/otros-facturacion" element={<div>Otros/Facturación</div>} />
+        <Route path="/cobranzas" element={<CuentasCorrientes/>} />
+        <Route path="/servicios-sociales" element={<ServiciosSociales/>} />
+        <Route path="/otros-facturacion" element={<OtrosFacturacion/>} />
+        <Route path="/visualizador-ticket" element={<VisualizadorTickets />} /> 
         </Routes>
       </div>
     </Router>

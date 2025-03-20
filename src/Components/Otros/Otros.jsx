@@ -2,9 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
-import styles from "./MesaDeEntrada.module.scss";
+import styles from "./Otros.module.scss";
 
-const MesaDeEntrada = () => {
+const OtrosFacturacion = () => {
   const navigate = useNavigate();
 
   return (
@@ -18,7 +18,7 @@ const MesaDeEntrada = () => {
       </div>
 
       <div className={styles["text-one"]}>
-        <h1>Mesa De Entrada</h1>
+        <h1>Otros</h1>
       </div>
 
       <div className="container text-center">
@@ -46,5 +46,4 @@ const MesaDeEntrada = () => {
   );
 };
 
-export default MesaDeEntrada;
-
+export default OtrosFacturacion;
