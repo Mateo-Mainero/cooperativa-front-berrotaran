@@ -10,6 +10,7 @@ import CuentasCorrientes from "./Components/Cobranzas/CuentasCorrientes";
 import ServiciosSociales from "./Components/ServiciosSociales/ServiciosSociales";
 import OtrosFacturacion from "./Components/Otros/Otros";
 import VisualizadorTickets from "./Components/VisualizadorTickets/VisualizadorTickets";
+import LlamadorTurnos from "./Components/LlamadorTurnos/LlamadorTurnos"
 
 
 // Componente de protección de rutas (requiere autenticación)
@@ -33,7 +34,8 @@ function App() {
         <Route path="/cobranzas" element={<CuentasCorrientes/>} />
         <Route path="/servicios-sociales" element={<ServiciosSociales/>} />
         <Route path="/otros-facturacion" element={<OtrosFacturacion/>} />
-        <Route path="/visualizador-ticket" element={<VisualizadorTickets />} /> 
+        <Route path="/visualizador-ticket/:area" element={<VisualizadorTickets />} />
+        <Route path="/visualizador-tickets" element={<LlamadorTurnos />} />
         </Routes>
       </div>
     </Router>

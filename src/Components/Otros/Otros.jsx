@@ -26,7 +26,7 @@ const OtrosFacturacion = () => {
           <div className="col-4">
             <div
               className={styles["menu-item"]}
-              onClick={() => navigate("/visualizador-de-tickets")}
+              onClick={() => navigate("/visualizador-ticket/otros-facturacion")}
             >
               <i className={`bi bi-person-workspace ${styles["menu-icon"]}`}></i>
               <p>Acceder al turno</p>

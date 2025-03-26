@@ -26,7 +26,7 @@ const MesaDeEntrada = () => {
           <div className="col-4">
             <div
               className={styles["menu-item"]}
-              onClick={() => navigate("/visualizador-de-tickets")}
+              onClick={() => navigate("/visualizador-ticket/mesa-de-entrada")}
             >
               <i className={`bi bi-person-workspace ${styles["menu-icon"]}`}></i>
               <p>Acceder al turno</p>

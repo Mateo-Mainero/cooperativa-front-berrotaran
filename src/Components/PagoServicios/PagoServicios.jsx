@@ -27,7 +27,7 @@ const PagoServicios = () => {
       <div className="container text-center">
         <div className="row g-3 justify-content-center">
           <div className="col-4">
-            <div className="menu-item" onClick={() => navigate("/visualizador-ticket")}>
+            <div className="menu-item" onClick={() => navigate("/visualizador-ticket/servicios")}>
               <i className="bi bi-droplet menu-icon"></i>
               <p>Pagar Los Servicios</p>
             </div>

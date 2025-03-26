@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import io from "socket.io-client";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,20 +8,32 @@ import styles from "./VisualizadorTickets.module.scss";
 import logo1 from "../../assets/logo1.png";
 import logo2 from "../../assets/logo2.png";
 
-const socket = io("http://localhost:4000"); // Asegúrate de que el backend corre en este puerto
+// Configurar correctamente la conexión con el backend
+const socket = io("http://localhost:4000");
+
+const AREAS = {
+  servicios: "Pago De Servicios",
+  "mesa-de-entrada": "Mesa de Entrada",
+  cobranzas: "Cuentas Corrientes",
+  "servicios-sociales": "Servicios Sociales",
+  "otros-facturacion": "Otros",
+};
 
 const VisualizadorTickets = () => {
-  const [ticketNumber, setTicketNumber] = useState("0001");
+  const { area } = useParams(); // Captura el área de la URL
   const navigate = useNavigate();
+  const [ticketNumber, setTicketNumber] = useState("0001");
 
   useEffect(() => {
+    console.log("Área detectada:", area); // Verificar si el área llega correctamente
+
     socket.on("updateTicket", (newTicket) => {
       setTicketNumber(newTicket);
 
       // Enviar ticket a la impresora térmica con Axios
       axios
-        .post("http://localhost:4000/print-ticket", { ticketNumber: newTicket })
-        .then(() => console.log("Ticket enviado a la impresora"))
+        .post("http://localhost:4000/print-ticket", { ticketNumber: newTicket, area })
+        .then(() => console.log(`Ticket enviado para ${area}`))
         .catch((error) => console.error("Error al imprimir el ticket:", error));
 
       // Después de 3 segundos, volver al menú
@@ -33,7 +45,10 @@ const VisualizadorTickets = () => {
     return () => {
       socket.off("updateTicket");
     };
-  }, [navigate]);
+  }, [navigate, area]);
+
+  // Verificar si el área existe en el diccionario
+  const areaTitle = AREAS[area] || "Área No Reconocida";
 
   return (
     <div className={styles["tablet-container"]}>
@@ -42,7 +57,7 @@ const VisualizadorTickets = () => {
       </div>
 
       <div className={styles["text-one"]}>
-        <h1>PAGO DE SERVICIOS</h1>
+        <h1>{areaTitle}</h1>
       </div>
 
       <div className={styles["ticket-number"]}>
@@ -61,5 +76,6 @@ const VisualizadorTickets = () => {
 };
 
 export default VisualizadorTickets;
+
 
 

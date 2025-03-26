@@ -1,0 +1,52 @@
+.table-container {
+    max-width: 100px;
+    margin: 10px auto;
+}
+.body{
+    text-align: center;
+}
+.tablet-container {
+    max-width: auto;
+    background: white;
+    border-radius: 20px;
+    padding: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 5px;
+    text-align: center;
+}
+
+.logo {
+    max-width: 20px;
+    margin-bottom: 10px;
+}
+
+.image-public {
+    padding: 42px 0px;
+}
+
+.footer-text {
+    margin-top: 15px;
+    font-style: italic;
+    color: #8837f5;
+    font-size: 12px;
+}
+
+.table {
+    table-layout: fixed;
+    width: 100%;
+
+    th, td {
+        width: 33.33%;
+        text-align: center;
+    }
+}
+
+.highlight {
+    animation: blink 1s infinite alternate;
+    background-color: #ffd700;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
